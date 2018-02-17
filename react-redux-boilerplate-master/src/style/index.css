@@ -1,0 +1,6 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+@import 'configs/variables.css';
+
+body {
+	font-family: $font-libre;
+}
