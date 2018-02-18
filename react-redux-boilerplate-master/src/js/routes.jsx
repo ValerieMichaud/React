@@ -37,21 +37,19 @@ const EditPage = ({ match }) => (
 
 
 module.exports = (
-  <div className="container">
-    <div className="container__content">
-      <Switch>
-        <Route exact path="/" component={ExampleRouteHandler} />
-        <Route path="/page" component={JustAnotherPage} />
-        <Route path="/search" component={JustAnotherPage} />
-        <Route path="/customer" component={JustAnotherPage} />
-        <Route path="/bulk-email" component={JustAnotherPage} />
-        <Route path="/events" component={JustAnotherPage} />
-        <Route exact path="/event" component={AddPage} />
-        <Route exact path="/event/:id" component={EditPage} />
-        <Route path="/tags" component={JustAnotherPage} />
-        <Route path="/coupons" component={JustAnotherPage} />
-        <Route path="*" component={ExampleRouteHandler} />
-      </Switch>
-    </div>
+  <div>
+    <Switch>
+      <Route exact path="/" component={ExampleRouteHandler} />
+      <Route path="/page" component={JustAnotherPage} />
+      <Route path="/search" component={JustAnotherPage} />
+      <Route path="/customer" component={JustAnotherPage} />
+      <Route path="/bulk-email" component={JustAnotherPage} />
+      <Route path="/events" component={JustAnotherPage} />
+      <Route exact path="/event" component={AddPage} />
+      <Route exact path="/event/:id" component={EditPage} />
+      <Route path="/tags" component={JustAnotherPage} />
+      <Route path="/coupons" component={JustAnotherPage} />
+      <Route path="*" component={ExampleRouteHandler} />
+    </Switch>
   </div>
 );
