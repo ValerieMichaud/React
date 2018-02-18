@@ -1,40 +1,37 @@
 import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
-import { actions as exampleActions } from '../../redux/modules/example';
-import { exampleSelector } from '../../redux/selectors/exampleSelector';
-import { Example, ExampleWithError } from '../../common/components/Example';
-import { ErrorBoundary } from '../../common/components/Utilities';
+import {
+  Route,
+  Switch,
+  withRouter,
+} from 'react-router-dom';
+import { Header } from '../../common/components/Header';
+import { Navigation } from '../../common/components/Navigation';
 
 require('../../../style/index.css');
 
-const mapStateToProps = state => ({
-  example: exampleSelector(state),
-});
+const HeaderWithRouter = withRouter(props => <Header {...props} />);
+const NavigationWithRouter = withRouter(props => <Navigation {...props} />);
 
-const mapDispatchToProps = {
-  ...exampleActions,
-};
-
-@connect(mapStateToProps, mapDispatchToProps)
 class ExampleView extends Component {
-  static propTypes = {
-    example: PropTypes.object.isRequired,
+  constructor(props) {
+    super(props);
+    this.state = {
+      navigationOpen: false,
+    };
   }
 
-  componentDidMount() {
-    this.props.getAwesomeCode();
+  myCallback = (dataFromChild) => {
+    this.setState({
+      navigationOpen: !this.state.navigationOpen,
+    });
   }
 
   render() {
     return (
-      <Fragment>
-        <Example {...this.props} />
-        <ErrorBoundary>
-          <ExampleWithError {...this.props} />
-        </ErrorBoundary>
-      </Fragment>
+      <div>
+        <HeaderWithRouter callbackFromParent={this.myCallback} navigationOpen={this.state.navigationOpen} />
+        <NavigationWithRouter navigationOpen={this.state.navigationOpen} />
+      </div>
     )
   }
 }

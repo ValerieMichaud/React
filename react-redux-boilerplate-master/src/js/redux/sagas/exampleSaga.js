@@ -1,17 +1,23 @@
 import { put, fork, takeLatest } from 'redux-saga/effects';
 import { constants as exampleConstants, actions as exampleActions } from '../modules/example';
 
-import type { exampleType } from '../../common/types/example'
+//import type { exampleType } from '../../common/types/example'
+import type { showtixType } from '../../common/types/showtix'
 
 export function* fetchExampleData() {
   // pretend there is an api call
-  const result: exampleType = {
+  /* const result: exampleType = {
     title: 'Everything is Awesome',
     description: __CONFIG__.description,
     source: 'This message is coming from Redux',
-  };
+  }; */
 
-  yield put(exampleActions.updateExample(result));
+  const showtix: showtixType = {
+  	navigation: ''
+  }
+
+  //yield put(exampleActions.updateExample(result));
+  yield put(exampleActions.updateExample(showtix));
 }
 
 

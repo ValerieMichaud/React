@@ -21,7 +21,7 @@ class Navigation extends PureComponent {
     if (isAdmin) {
       return (
         <div>
-          <nav className="showtix-navigation js-navigation">
+          <nav className={!this.props.navigationOpen ? 'showtix-navigation' : 'showtix-navigation is-active'} >
             <AdminNavigationWithRouter />
             <PatronNavigationWithRouter />
           </nav>
@@ -30,7 +30,7 @@ class Navigation extends PureComponent {
     }
     return (
       <div>
-        <nav className="showtix-navigation js-navigation">
+        <nav className={!this.props.navigationOpen ? 'showtix-navigation' : 'showtix-navigation is-active'} >
           <PatronNavigationWithRouter />
         </nav>
       </div> 

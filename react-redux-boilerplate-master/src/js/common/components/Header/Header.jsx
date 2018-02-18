@@ -1,20 +1,11 @@
 import React, { PureComponent } from 'react';
+import type { showtixType } from '../../types/showtix';
 
 import './Header.css';
 
 class Header extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      
-    };
-  }
-
-  toggleActive(selector) {
-    const elements = document.body.querySelectorAll(selector);
-    for (var i = 0; i < elements.length; ++i) {
-      elements[i].classList.toggle('is-active');
-    }
+  someFn = () => {
+      this.props.callbackFromParent();
   }
 
   render() {
@@ -22,7 +13,7 @@ class Header extends PureComponent {
       <div>
         <nav className="showtix-header">
           <div className="container d-flex align-items-center justify-content-between">
-            <a className="showtix-header__toggle-navigation js-navigation js-toggle-navigation js-toggle-active" href="#" onClick={() => this.toggleActive('.js-navigation')}>
+            <a className={!this.props.navigationOpen ? 'showtix-header__toggle-navigation' : 'showtix-header__toggle-navigation is-active'} href="javascript:return false;" onClick={() => this.someFn()}>
               <i></i>
               <i></i>
               <i></i>

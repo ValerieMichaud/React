@@ -1,7 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 import { Map } from 'immutable';
 
-import type { exampleType } from '../../common/types/example'
+//import type { exampleType } from '../../common/types/example'
+import type { showtixType } from '../../common/types/showtix'
 
 const GET_EXAMPLE = 'app/example/GET_EXAMPLE';
 const UPDATE_EXAMPLE = 'app/example/UPDATE_EXAMPLE';
@@ -15,7 +16,7 @@ export const constants = {
 // Actions
 // ------------------------------------
 export const getAwesomeCode = createAction(GET_EXAMPLE, () => ({}));
-export const updateExample = createAction(UPDATE_EXAMPLE, (result : exampleType) => ({ result }));
+export const updateExample = createAction(UPDATE_EXAMPLE, (result : showtixType) => ({ result }));
 
 export const actions = {
   getAwesomeCode,
