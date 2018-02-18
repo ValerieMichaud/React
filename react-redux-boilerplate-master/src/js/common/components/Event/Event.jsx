@@ -22,9 +22,12 @@ const EventAPI = {
 class Event extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      event: {},
+    };
   }
 
-  render() {
+  componentWillMount() {
     let event = {
       id: 0,
       name: '',
@@ -35,7 +38,22 @@ class Event extends React.Component {
       if (!event) {
         return <div>Sorry, but the event was not found</div>
       }
+      this.setState({
+        event: event,
+      });
     } 
+    console.log(this.state.event);
+  }
+
+  handleChange(e) {
+    // If you are using babel, you can use ES 6 dictionary syntax { [e.target.name] = e.target.value }
+    var eventUpdate = this.state.event;
+    eventUpdate[e.target.name] = e.target.value;
+    this.setState({event: eventUpdate})
+  }
+
+  render() {
+    
     
     return (
       <div>
@@ -59,7 +77,25 @@ class Event extends React.Component {
                   <div className="showtix-form__group">
                       <label className="showtix-label">Event name*</label>
                       <div className="showtix-form__input">
-                        <input className="showtix-input js-phone-mask" type="text" value={event.name} />
+                        <input className="showtix-input" type="text" name="name" value={this.state.event.name} onChange={this.handleChange.bind(this)} value={this.state.event.name} />
+                      </div> 
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  <div className="showtix-form__group">
+                      <label className="showtix-label">Id</label>
+                      <div className="showtix-form__input">
+                        <input className="showtix-input" type="text" name="id" value={this.state.event.id} onChange={this.handleChange.bind(this)} value={this.state.event.id} />
+                      </div>
+                  </div>
+                </div>
+                <div className="col-12 col-md-6">
+                  <div className="showtix-form__group">
+                      <label className="showtix-label">Position*</label>
+                      <div className="showtix-form__input">
+                        <input className="showtix-input" type="text" name="position" value={this.state.event.position} onChange={this.handleChange.bind(this)} value={this.state.event.position} />
                       </div> 
                   </div>
                 </div>
