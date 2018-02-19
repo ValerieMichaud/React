@@ -118,6 +118,22 @@ const COMMON_LOADERS = [
         }
       }
     ],
+  },
+  {
+    test: /\.sass$/,
+    use: [
+      {
+        loaders: ["style", "css", "sass"]
+      }
+    ]
+  },
+  {
+    test: /\.scss$/,
+    use: [
+      {
+        loaders: ["style", "css", "sass"]
+      }
+    ]
   }
 ];
 
@@ -130,7 +146,7 @@ export default {
     path: BUILD_PATH,
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css'],
+    extensions: ['.js', '.jsx', '.css', '.sass', '.scss'],
     modules: [
       path.join(__dirname, 'src'),
       path.join(__dirname, 'assets'),
