@@ -8,25 +8,26 @@ export default class TextareaCount extends React.Component {
     }
   }
 
-  handleChange(event) {
-    //console.log(this.props)
-    console.log(event)
-    //if(event.target.value.length > this.props.maxLength){
-      //this.setState({
-      //  length: event.target.value.length
-      //});
-    //}
+  handleKeyUp(e) {
+    if(e.target.value.length > this.props.maxLength){
+      e.target.value = e.target.value.slice(0, this.props.maxLength);
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      this.setState({
+        length: e.target.value.length
+      });
+    }
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <div class="showtix-form__input">
-          <textarea class="showtix-input" rows="5" onChange={this.handleChange}></textarea>
+          <textarea class="showtix-input" rows="5" onKeyUp={this.handleKeyUp.bind(this)}></textarea>
         </div>
         <div class="showtix-note text-right">
-          {this.state.length} character(s) 
+          {this.state.length}/{this.props.maxLength}
         </div>
       </div>
     );
