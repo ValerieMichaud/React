@@ -3,6 +3,9 @@ import ListErrors from './ListErrors';
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
+import MaskedInput from 'react-text-mask';
+import emailMask from 'text-mask-addons/dist/emailMask';
+import TextareaCount from './TextareaCount';
 import { inject, observer } from 'mobx-react';
 
 let _this;
@@ -13,39 +16,88 @@ export default class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
+      register: {
+        business: {
+          name: '',
+          email: '',
+          phone: '',
+          contact: '',
+          address1: '',
+          address2: '',
+          city: '',
+          state: '',
+          zip: ''
+        },
+        admin: {
+          username: '',
+          password: '',
+          firstname: '',
+          lastname: '',
+          email: '',
+          token: '',
+          id: ''
+        },
+        options: {
+          referred: '',
+          donation: false,
+          donationMessage: '',
+          donationEmail: '',
+          captureAddress: false,
+          willcall: false,
+          refund: false,
+          exchange: false
+        }
+      },
     };
   }
 
   facebookCallback(response) {
     console.log(response);
     let nameArray = response.name.split(' ');
-    let user = {
-      email: response.email,
-      username: nameArray[0]+nameArray[1],
-      firstname: nameArray[0],
-      lastname: nameArray[1],
-      accesstoken: response.accessToken,
-      id: response.id
+    let register = {
+      admin: {
+        email: response.email,
+        username: nameArray[0]+nameArray[1],
+        firstname: nameArray[0],
+        lastname: nameArray[1],
+        token: response.accessToken,
+        id: response.id
+      }
     }
     _this.setState({
-      user: user,
+      register: register,
     });
   }
 
   googleCallback(response) {
     console.log(response);
-    let user = {
-      email: response.profileObj.email,
-      username: response.profileObj.givenName + response.profileObj.familyName,
-      firstname: response.profileObj.givenName,
-      lastname: response.profileObj.familyName,
-      accesstoken: response.accessToken,
-      id: response.googleId
+    let register = {
+      admin: {
+        email: response.profileObj.email,
+        username: response.profileObj.givenName + response.profileObj.familyName,
+        firstname: response.profileObj.givenName,
+        lastname: response.profileObj.familyName,
+        token: response.accessToken,
+        id: response.googleId
+      }
     }
     _this.setState({
-      user: user,
+      register: register,
     });
+  }
+
+  handleChange(e) {
+    let value = e.target.value;
+    if(e.target.checked !== "undefined"){
+      value = e.target.checked;
+    }
+    console.log(e.target);
+    console.log(value);
+    let object = e.target.attributes.getNamedItem('object').value;
+    let property = e.target.name;
+    let registerUpdate = this.state.register;
+    registerUpdate[object][property] = value;
+    this.setState({register: registerUpdate})
   }
 
   componentWillMount() {
@@ -56,14 +108,14 @@ export default class Register extends React.Component {
     this.props.authStore.reset();
   }
 
-  handleUsernameChange = e => this.props.authStore.setUsername(e.target.value);
+  /* handleUsernameChange = e => this.props.authStore.setUsername(e.target.value);
   handleEmailChange = e => this.props.authStore.setEmail(e.target.value);
   handlePasswordChange = e => this.props.authStore.setPassword(e.target.value);
   handleSubmitForm = (e) => {
     e.preventDefault();
     this.props.authStore.register()
       .then(() => this.props.history.replace('/'));
-  };
+  }; */
 
   render() {
     const { values, errors, inProgress } = this.props.authStore;
@@ -86,7 +138,7 @@ export default class Register extends React.Component {
                 !</i></label>
 
                 <div class="showtix-form__input">
-                  <input class="showtix-input" type="text" />
+                  <input class="showtix-input" type="text" object="business" name="name" value={this.state.register.business.name} onChange={this.handleChange.bind(this)} />
                 </div>
               </div>
             </div>
@@ -99,7 +151,7 @@ export default class Register extends React.Component {
                 !</i></label>
 
                 <div class="showtix-form__input">
-                  <input class="showtix-input" type="text" />
+                  <input class="showtix-input" type="text" object="business" name="address1" value={this.state.register.business.address1} onChange={this.handleChange.bind(this)} />
                 </div>
               </div>
             </div>
@@ -108,13 +160,22 @@ export default class Register extends React.Component {
           <div class="row">
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label">Organization/Business Email* <i class=
+                <label class="showtix-label" for="business_email">Organization/Business Email* <i class=
                 "showtix-tooltip" data-tooltip=
                 "Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble">
                 !</i></label>
 
                 <div class="showtix-form__input">
-                  <input class="showtix-input" type="text" />
+                  <MaskedInput
+                    mask={emailMask}
+                    className="showtix-input"
+                    placeholder="Enter an email"
+                    guide={false}
+                    id="business_email"
+                    object="business" name="email" 
+                    value={this.state.register.business.email} 
+                    onChange={this.handleChange.bind(this)}
+                  />
                 </div>
               </div>
             </div>
@@ -124,7 +185,14 @@ export default class Register extends React.Component {
                 <label class="showtix-label">Billing Address 2</label>
 
                 <div class="showtix-form__input">
-                  <input class="showtix-input" type="text" />
+                  <input 
+                    class="showtix-input" 
+                    type="text" 
+                    object="business" 
+                    name="address2" 
+                    value={this.state.register.business.address2} 
+                    onChange={this.handleChange.bind(this)}
+                    />
                 </div>
               </div>
             </div>
@@ -133,13 +201,23 @@ export default class Register extends React.Component {
           <div class="row">
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label">Organization/Business Phone* <i class=
+                <label class="showtix-label" for="business_phone">Organization/Business Phone* <i class=
                 "showtix-tooltip" data-tooltip=
                 "Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble">
                 !</i></label>
 
                 <div class="showtix-form__input">
-                  <input class="showtix-input js-phone-mask" type="text" />
+                  <MaskedInput
+                    mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                    className="showtix-input"
+                    placeholder="Enter a phone number"
+                    guide={true}
+                    id="business_phone"
+                    object="business"
+                    name="phone"
+                    value={this.state.register.business.phone}
+                    onChange={this.handleChange.bind(this)}
+                  />
                 </div>
               </div>
             </div>
@@ -149,7 +227,7 @@ export default class Register extends React.Component {
                 <label class="showtix-label">Billing City*</label>
 
                 <div class="showtix-form__input">
-                  <input class="showtix-input" type="text" />
+                  <input class="showtix-input" type="text" object="business" name="city" value={this.state.register.business.city} onChange={this.handleChange.bind(this)} />
                 </div>
               </div>
             </div>
@@ -164,7 +242,7 @@ export default class Register extends React.Component {
                 !</i></label>
 
                 <div class="showtix-form__input">
-                  <input class="showtix-input" type="text" />
+                  <input class="showtix-input" type="text" object="business" name="contact" value={this.state.register.business.contact} onChange={this.handleChange.bind(this)} />
                 </div>
               </div>
             </div>
@@ -174,7 +252,7 @@ export default class Register extends React.Component {
                 <label class="showtix-label">Billing State/Province*</label>
 
                 <div class="showtix-form__select">
-                  <select class="showtix-input">
+                  <select class="showtix-input" object="business" name="state" value={this.state.register.business.state} onChange={this.handleChange.bind(this)}>
                     <option value="">
                       United States
                     </option>
@@ -495,10 +573,20 @@ export default class Register extends React.Component {
 
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label">Billing Zip*</label>
+                <label class="showtix-label" for="business_zip">Billing Zip*</label>
 
                 <div class="showtix-form__input">
-                  <input class="showtix-input js-zip-mask" type="text" />
+                  <MaskedInput
+                    mask={[/\d/, /\d/, /\d/, /\d/, /\d/]}
+                    className="showtix-input"
+                    placeholder="Enter a zip code"
+                    guide={true}
+                    id="business_zip"
+                    object="business"
+                    name="zip"
+                    value={this.state.register.business.zip}
+                    onChange={this.handleChange.bind(this)}
+                  />
                 </div>
               </div>
             </div>
@@ -540,7 +628,7 @@ export default class Register extends React.Component {
                   !</i></label>
 
                   <div class="showtix-form__input">
-                    <input class="showtix-input" type="text" value={this.state.user.username} />
+                    <input class="showtix-input" type="text" object="admin" name="username" value={this.state.register.admin.username} onChange={this.handleChange.bind(this)} />
                   </div>
                 </div>
               </div>
@@ -553,7 +641,7 @@ export default class Register extends React.Component {
                   !</i></label>
 
                   <div class="showtix-form__input">
-                    <input class="showtix-input" type="password" />
+                    <input class="showtix-input" type="password" object="admin" name="password" value={this.state.register.admin.password} onChange={this.handleChange.bind(this)} />
                   </div>
                 </div>
               </div>
@@ -565,7 +653,7 @@ export default class Register extends React.Component {
                   <label class="showtix-label">First Name*</label>
 
                   <div class="showtix-form__input">
-                    <input class="showtix-input" type="text" value={this.state.user.firstname} />
+                    <input class="showtix-input" type="text" object="admin" name="firstname" value={this.state.register.admin.firstname} onChange={this.handleChange.bind(this)} />
                   </div>
                 </div>
               </div>
@@ -575,7 +663,7 @@ export default class Register extends React.Component {
                   <label class="showtix-label">Last Name*</label>
 
                   <div class="showtix-form__input">
-                    <input class="showtix-input" type="text" value={this.state.user.lastname} />
+                    <input class="showtix-input" type="text" object="admin" name="lastname" value={this.state.register.admin.lastname} onChange={this.handleChange.bind(this)} />
                   </div>
                 </div>
               </div>
@@ -587,7 +675,7 @@ export default class Register extends React.Component {
                   <label class="showtix-label">Email*</label>
 
                   <div class="showtix-form__input">
-                    <input class="showtix-input js-email-mask" type="text" value={this.state.user.email} />
+                    <input class="showtix-input" type="text" object="admin" name="email" value={this.state.register.admin.email} onChange={this.handleChange.bind(this)} />
                   </div>
                 </div>
               </div>
@@ -614,7 +702,7 @@ export default class Register extends React.Component {
                   !</i></label>
 
                   <div class="showtix-form__input">
-                    <input class="showtix-input" type="text" />
+                    <input class="showtix-input" type="text" object="options" name="referred" value={this.state.register.options.referred} onChange={this.handleChange.bind(this)} />
                   </div>
                 </div>
               </div>
@@ -626,15 +714,27 @@ export default class Register extends React.Component {
                   <div class="row">
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
-                        <input type="radio" class="showtix-input" id="donation-1" name=
-                        "donation" /> <label class="showtix-label" for="donation-1">Yes</label>
+                        <input 
+                          type="radio"
+                          class="showtix-input"
+                          id="donation-1"
+                          object="options"
+                          name="donation"
+                          checked={this.state.register.options.donation === true} 
+                          onChange={this.handleChange.bind(this)}
+                         />
+                         <label class="showtix-label" for="donation-1">Yes</label>
                       </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
-                        <input type="radio" class="showtix-input" id="donation-2" name=
-                        "donation" /> <label class="showtix-label" for="donation-2">No</label>
+                        <input type="radio" class="showtix-input" id="donation-2"
+                          object="options"
+                          name="donation"
+                          checked={this.state.register.options.donation === false} 
+                          onChange={this.handleChange.bind(this)}
+                          /> <label class="showtix-label" for="donation-2">No</label>
                       </div>
                     </div>
                   </div>
@@ -647,10 +747,7 @@ export default class Register extends React.Component {
                 <div class="showtix-form__group">
                   <label class="showtix-label">On-Screen Donation Message</label>
 
-                  <div class="showtix-form__input">
-                    <textarea class="showtix-input" rows="5">
-      </textarea>
-                  </div>
+                  <TextareaCount maxLength="250" />
 
                   <div class="showtix-note">
                     Please limit to one sentence
@@ -663,8 +760,7 @@ export default class Register extends React.Component {
                   <label class="showtix-label">Text for Donation Receipt Email</label>
 
                   <div class="showtix-form__input">
-                    <textarea class="showtix-input" rows="5">
-      </textarea>
+                    <textarea class="showtix-input" rows="5"></textarea>
                   </div>
                 </div>
               </div>
