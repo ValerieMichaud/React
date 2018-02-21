@@ -12,8 +12,7 @@ export default class AddEvent extends React.Component {
 
     return (
       <div>
-        <h2>Add page</h2>
-        <Event />
+      	<Event title="Create an event" />
       </div>
     );
   }
