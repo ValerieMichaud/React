@@ -15,45 +15,22 @@ let _this;
 
 const DragHandle = SortableHandle(() => <span>::</span>); // This can be any component you want
 
-const SortableItem = SortableElement(({index, value}) => {
+const SortableItem = SortableElement(({value}) => {
   return (
-    <tr id={value.id}>
-      <td>
-        {(value.delete) && (
-          <DragHandle />
-        )}  
-      </td>
-      <td>
-        <div class="showtix-form__input">
-          <input class="showtix-input" type="text" name="firstname" defaultValue={value.firstname} onChange={_this.handleCast.bind(value)} />
-        </div>
-      </td>
-      <td>
-        <div className="showtix-form__input">
-          <input className="showtix-input" type="text" name="lastname" defaultValue={value.lastname} onChange={_this.handleCast.bind(value)} />
-        </div>
-      </td>
-      <td>
-        <div className="showtix-form__input">
-          <input className="showtix-input" type="text" name="role" defaultValue={value.role} onChange={_this.handleCast.bind(value)} />
-        </div>
-      </td>
-      <td>
-        {(value.delete) && (
-          <a href="">Delete</a>
-        )}
-      </td>
-    </tr>
+    <li>
+      <DragHandle />
+      {value}
+    </li>
   );
 });
 
 const SortableList = SortableContainer(({items}) => {
   return (
-    <tbody>
+    <ul>
       {items.map((value, index) => (
         <SortableItem key={`item-${index}`} index={index} value={value} />
       ))}
-    </tbody>
+    </ul>
   );
 });
 
@@ -69,17 +46,11 @@ export default class Event extends React.Component {
       files: [],
       casts: [{
         id: 0,
-        firstname: 'aasdasd',
-        lastname: 'asdasd',
-        role: 'asdasd',
-        delete: true
-      },
-      {
-        id: 1,
         firstname: '',
         lastname: '',
         role: '',
-        delete: false
+        delete: false,
+        order: 1
       }],
       prices: ['price-0']
     };
@@ -96,13 +67,12 @@ export default class Event extends React.Component {
   }
 
   handleCast(e) {
-    console.log(e);
     let value = e.target.value;
-    //let object = e.target.attributes.getNamedItem('object').value;
+    let object = e.target.attributes.getNamedItem('object').value;
     let property = e.target.name;
     let castUpdate = _this.state.casts;
-    //castUpdate[object][property] = value;
-    //_this.setState({casts: castUpdate});
+    castUpdate[object][property] = value;
+    _this.setState({casts: castUpdate});
     _this.checkIfAddRow();
   }
 
@@ -110,11 +80,7 @@ export default class Event extends React.Component {
     let castUpdate = _this.state.casts;
 
     if(castUpdate[_this.state.casts.length-1].firstname.length > 0 && castUpdate[_this.state.casts.length-1].lastname.length > 0 && castUpdate[_this.state.casts.length-1].role.length > 0){
-      castUpdate.forEach(function(part, index, cast) {
-        if(cast.firstname.length > 0 && cast.lastname.length > 0 && cast.role.length > 0){
-          cast.delete = true;
-        }
-      });
+      castUpdate[_this.state.casts.length-1].delete = true;
       _this.addRowCast();
     }
   }
@@ -126,16 +92,18 @@ export default class Event extends React.Component {
       firstname: '',
       lastname: '',
       role: '',
-      delete: false
+      delete: false,
+      order: _this.state.casts.length+1,
     }
     castUpdate.push(newCast);
     _this.setState({casts: castUpdate});
   }
 
   onSortEnd = ({oldIndex, newIndex}) => {
-    const casts = this.state.casts;
+    const {items} = this.state.casts;
+
     this.setState({
-      casts: arrayMove(casts, oldIndex, newIndex),
+      casts: arrayMove(items, oldIndex, newIndex),
     });
   };
 
@@ -446,7 +414,38 @@ export default class Event extends React.Component {
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <SortableList items={this.state.casts} onSortEnd={this.onSortEnd} useDragHandle={true} />
+
+                        <tbody>
+                          {this.state.casts.map(function(item, key){
+                            return (
+                              <tr key={key} id={item.id}>
+                                <td>move</td>
+                                <td>
+                                  <div class="showtix-form__input">
+                                    <input class="showtix-input" type="hidden" object={key} name="order" defaultValue={item.order} />
+                                    <input class="showtix-input" type="hidden" object={key} name="id" defaultValue={item.id} />
+                                    <input class="showtix-input" type="text" object={key} name="firstname" defaultValue={item.firstname} onChange={_this.handleCast.bind(item)} />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="showtix-form__input">
+                                    <input className="showtix-input" type="text" object={key} name="lastname" defaultValue={item.lastname} onChange={_this.handleCast.bind(item)} />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="showtix-form__input">
+                                    <input className="showtix-input" type="text" object={key} name="role" defaultValue={item.role} onChange={_this.handleCast.bind(item)} />
+                                  </div>
+                                </td>
+                                <td>
+                                  {(item.delete) && (
+                                    <a href="">Delete</a>
+                                  )}
+                                </td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
                       </table>
                     </div>
                   </div>

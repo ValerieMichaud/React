@@ -1,4 +1,6 @@
 import React from 'react';
+import Modal from 'react-bootstrap/lib/Modal';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 
 import './Event.css';
 
@@ -22,17 +24,18 @@ const EventAPI = {
 class Event extends React.Component {
   constructor(props) {
     super(props);
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
     this.state = {
       event: {},
+      show: false,
     };
   }
 
   componentWillMount() {
-    let event = {
-      id: 0,
-      name: '',
-      position: ''
-    };
+    let event = this.state.event;
     if(typeof (this.props.id) !== "undefined"){
       event = EventAPI.get(parseInt(this.props.id));
       if (!event) {
@@ -41,8 +44,16 @@ class Event extends React.Component {
       this.setState({
         event: event,
       });
-    } 
-    console.log(this.state.event);
+    }
+  }
+
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow(e) {
+    e.preventDefault();
+    this.setState({ show: true });
   }
 
   handleChange(e) {
@@ -57,10 +68,77 @@ class Event extends React.Component {
     
     return (
       <div>
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>Text in a modal</h4>
+            <p>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </p>
+
+            <hr />
+
+            <h4>Overflowing text to show scroll behavior</h4>
+            <p>
+              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
+              ac consectetur ac, vestibulum at eros.
+            </p>
+            <p>
+              Praesent commodo cursus magna, vel scelerisque nisl consectetur
+              et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
+              auctor.
+            </p>
+            <p>
+              Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
+              cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
+              dui. Donec ullamcorper nulla non metus auctor fringilla.
+            </p>
+            <p>
+              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
+              ac consectetur ac, vestibulum at eros.
+            </p>
+            <p>
+              Praesent commodo cursus magna, vel scelerisque nisl consectetur
+              et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
+              auctor.
+            </p>
+            <p>
+              Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
+              cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
+              dui. Donec ullamcorper nulla non metus auctor fringilla.
+            </p>
+            <p>
+              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
+              ac consectetur ac, vestibulum at eros.
+            </p>
+            <p>
+              Praesent commodo cursus magna, vel scelerisque nisl consectetur
+              et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
+              auctor.
+            </p>
+            <p>
+              Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
+              cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
+              dui. Donec ullamcorper nulla non metus auctor fringilla.
+            </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <a className="showtix-button" onClick={this.handleClose}>Close</a>
+          </Modal.Footer>
+        </Modal>
+
         <div className="showtix-section container">
           <div className="row">
             <div className="col-12 col-md-8">
               <h1>Event details</h1>
+              <a href="#" onClick={this.handleShow}>
+                Launch demo modal
+              </a>
               <div className="row">
                 <div className="col-12 col-md-6">
                   <div className="showtix-form__group">

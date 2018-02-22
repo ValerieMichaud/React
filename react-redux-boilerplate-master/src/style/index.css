@@ -1,6 +1,7 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 @import 'configs/variables.css';
 
+@import 'components/button.css';
 @import 'components/form.css';
 @import 'components/input.css';
 @import 'components/label.css';

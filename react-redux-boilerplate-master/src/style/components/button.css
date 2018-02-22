@@ -1,0 +1,61 @@
+.showtix-button {
+  position: relative;
+  height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $grey-3;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  overflow: hidden;
+
+  & + .showtix-button {
+    margin-left: $padding;
+  }
+
+  span {
+    position: relative;
+    z-index: 1;
+  }
+
+  &:before {
+    content: '';
+      z-index: 0;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      margin: -15px 0 0 1px;
+      width: 30px;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba($white, 0.2);
+      transform-origin: 100% 50%;
+      transform: scale3d(1, 2, 1);
+      transition: transform 0.3s, opacity 0.3s;
+      transition-timing-function: cubic-bezier(0.7,0,0.9,1);
+  }
+  &:hover {
+    cursor: pointer;
+    &:before {
+      transform: scale3d(9, 9, 1);
+    }
+  }
+
+  &__medium {
+    height: 33px;
+    font-size: 14px;
+  }
+  &__small {
+    height: 28px;
+    font-size: 12px;
+  }
+  &__xsmall {
+    height: 25px;
+    font-size: 11px;
+  }
+}
