@@ -22,3 +22,8 @@
 	font-size:14px;
 	font-weight:700;
 }
+
+.sortableHelper {
+	display:table !important;
+}
+

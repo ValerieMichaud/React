@@ -17,7 +17,7 @@ const DragHandle = SortableHandle(() => <span>::</span>); // This can be any com
 
 const SortableItem = SortableElement(({index, value}) => {
   return (
-    <tr id={value.id}>
+    <tr>
       <td>
         {(value.delete) && (
           <DragHandle />
@@ -25,22 +25,22 @@ const SortableItem = SortableElement(({index, value}) => {
       </td>
       <td>
         <div class="showtix-form__input">
-          <input class="showtix-input" type="text" name="firstname" defaultValue={value.firstname} onChange={_this.handleCast.bind(value)} />
+          <input class="showtix-input" type="text" name="firstname" object={value.id} value={value.firstname} onChange={_this.handleCast.bind(this)} />
         </div>
       </td>
       <td>
         <div className="showtix-form__input">
-          <input className="showtix-input" type="text" name="lastname" defaultValue={value.lastname} onChange={_this.handleCast.bind(value)} />
+          <input className="showtix-input" type="text" name="lastname" object={value.id} value={value.lastname} onChange={_this.handleCast.bind(this)} />
         </div>
       </td>
       <td>
         <div className="showtix-form__input">
-          <input className="showtix-input" type="text" name="role" defaultValue={value.role} onChange={_this.handleCast.bind(value)} />
+          <input className="showtix-input" type="text" name="role" object={value.id} value={value.role} onChange={_this.handleCast.bind(this)} />
         </div>
       </td>
       <td>
         {(value.delete) && (
-          <a href="">Delete</a>
+          <button object={value.id} onClick={_this.removeCast.bind(this)}>Delete</button>
         )}
       </td>
     </tr>
@@ -96,33 +96,49 @@ export default class Event extends React.Component {
   }
 
   handleCast(e) {
-    console.log(e);
     let value = e.target.value;
-    //let object = e.target.attributes.getNamedItem('object').value;
+    let object = e.target.attributes.getNamedItem('object').value;
     let property = e.target.name;
     let castUpdate = _this.state.casts;
-    //castUpdate[object][property] = value;
-    //_this.setState({casts: castUpdate});
+    var index = castUpdate.findIndex(x => x.id == object);
+    castUpdate[index][property] = value;
+    _this.setState({casts: castUpdate});
     _this.checkIfAddRow();
+  }
+
+  removeCast(e) {
+    let object = e.target.attributes.getNamedItem('object').value;
+    let castUpdate = _this.state.casts;
+    var index = castUpdate.findIndex(x => x.id == object);
+    castUpdate.splice(index,1);
+    _this.setState({casts: castUpdate});
   }
 
   checkIfAddRow() {
     let castUpdate = _this.state.casts;
+    let castsLength = _this.state.casts.length;
+    
+    castUpdate.forEach(function(part, index, cast) {
+      if(part.firstname.length > 0 && part.lastname.length > 0 && part.role.length > 0){
+        // Cast can now be deleted
+        part.delete = true;
+        castsLength--;
+      }
+    });
 
-    if(castUpdate[_this.state.casts.length-1].firstname.length > 0 && castUpdate[_this.state.casts.length-1].lastname.length > 0 && castUpdate[_this.state.casts.length-1].role.length > 0){
-      castUpdate.forEach(function(part, index, cast) {
-        if(cast.firstname.length > 0 && cast.lastname.length > 0 && cast.role.length > 0){
-          cast.delete = true;
-        }
-      });
+    // If all cast members have firstname, lastname and role entered, add an empty row
+    if(castsLength === 0){
       _this.addRowCast();
     }
+
   }
 
   addRowCast() {
     let castUpdate = _this.state.casts;
+    console.log(castUpdate.length)
+    console.log(castUpdate[castUpdate.length-1])
     let newCast = {
-      id: _this.state.casts.length,
+      id: castUpdate[castUpdate.length-1].id+1,
       firstname: '',
       lastname: '',
       role: '',
