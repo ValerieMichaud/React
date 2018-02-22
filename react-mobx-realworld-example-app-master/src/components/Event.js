@@ -135,10 +135,12 @@ export default class Event extends React.Component {
 
   addRowCast() {
     let castUpdate = _this.state.casts;
-    console.log(castUpdate.length)
-    console.log(castUpdate[castUpdate.length-1])
+    /* let castUpdateSort = castUpdate;
+    castUpdateSort.sort(function(a, b){
+      return a.id - b.id;
+    }); */
     let newCast = {
-      id: castUpdate[castUpdate.length-1].id+1,
+      id: castUpdate[castUpdate.length-1].id+1, //might need to change that to get the right id??
       firstname: '',
       lastname: '',
       role: '',
