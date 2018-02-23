@@ -1,0 +1,61 @@
+.showtix-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  z-index: 2;
+  cursor: pointer;
+  border-radius: 50%;
+  background: map-get($showtix-colors, grey-3);
+  color: map-get($showtix-colors, white);
+  font-size: 14px;
+  font-weight: 800;
+  font-style: normal;
+
+  &:before, &:after {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:before {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    margin-bottom: 5px;
+    margin-left: -125px;
+    padding: 7px;
+    min-width: 250px;
+    border-radius: $border-radius;
+    background-color: map-get($showtix-colors, grey-3);
+    color: map-get($showtix-colors, white);;
+    content: attr(data-tooltip);
+    text-align: center;
+    font-size: 11px;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  &:after {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    margin-left: -5px;
+    width: 0;
+    border-top: 5px solid map-get($showtix-colors, grey-3);
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    content: " ";
+    font-size: 0;
+    line-height: 0;
+  }
+
+  &:hover:before,
+  &:hover:after {
+    visibility: visible;
+    opacity: 1;
+  }
+}

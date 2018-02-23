@@ -1,0 +1,55 @@
+@import 'styles/variables.scss';
+@import 'styles/components/badge.scss';
+
+.showtix-navigation {
+  position: fixed;
+  z-index: 99;
+  top: 53px;
+  left: -100%;
+  width: 300px;
+  height: 100vh;
+  background-color: map-get($showtix-colors, primary-2);
+  overflow-y: auto;
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.4);
+  transition: left 0.5s ease;
+  &.is-active {
+	left: 0;
+  }
+}
+
+
+.showtix-navigation__list, .showtix-navigation__sublist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  clear: both;
+}
+
+.showtix-navigation__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.showtix-navigation__link {
+  padding: 8px $padding;
+  font-size: 18px;
+  font-weight: 300;
+  color:map-get($showtix-colors, white);
+  transition: background 0.5s ease;
+
+  &:hover, &:active, &:focus {
+	text-decoration:none;
+	color:map-get($showtix-colors, white);
+	background: darken(map-get($showtix-colors, primary-2),5%);
+  }
+
+  .showtix-navigation__sublist & {
+	padding-left: 2*$padding;
+  }
+}
+
+.showtix-navigation__client {
+  margin-top: 40px;
+  background-color: map-get($showtix-colors, primary-1);
+}

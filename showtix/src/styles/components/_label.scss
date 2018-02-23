@@ -1,0 +1,16 @@
+.showtix-label {
+	display: flex;
+	align-items: center;
+	font-size: 18px;
+	font-weight: 300;
+	color: map-get($showtix-colors, primary-1);
+
+	.showtix-form__radio &, .showtix-form__checkbox & {
+		font-size: 16px;
+		color: map-get($showtix-colors, grey-3);
+	}
+
+	.showtix-event & {
+		color: map-get($showtix-colors, primary-1);
+	}
+}

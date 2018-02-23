@@ -10,6 +10,11 @@
 // Load our variables file that will overwrite
 @import 'variables.scss';
 
+
+.showtix-page-body {
+	padding-top: 50px;
+}
+
 // Create background colour classes
 @each $colorName, $color in $showtix-colors {
   .showtix-background__#{$colorName} {
