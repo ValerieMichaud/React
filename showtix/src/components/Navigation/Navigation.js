@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Route,
-  Switch,
-  withRouter,
-} from 'react-router-dom';
+import { Switch, withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import AdminNavigation from './AdminNavigation/AdminNavigation';
 import PatronNavigation from './PatronNavigation/PatronNavigation';

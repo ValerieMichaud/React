@@ -1,0 +1,26 @@
+@import '//fonts.googleapis.com/css?family=Libre+Franklin:300,500,600,800';
+
+.showtix-section__title {
+  font-family: $font-libre;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 25px 0;
+}
+
+h1, .showtix-h1 {
+	font-size: 28px;
+	font-weight: 300;
+	color: map-get($showtix-colors, primary-2);
+}
+
+h2, .showtix-h2 {
+	font-size: 24px;
+	font-weight: 300;
+	color: map-get($showtix-colors, primary-3);
+}
+
+p {
+	font-size: 14px;
+	line-height: 18px;
+	color: map-get($showtix-colors, grey-3);
+}
