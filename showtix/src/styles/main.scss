@@ -32,6 +32,11 @@ hr {
 	padding-top: 50px;
 }
 
+.showtix-section {
+  	padding-top: $grid-gutter-width;
+  	padding-bottom: $grid-gutter-width;
+}
+
 // Create background colour classes
 @each $colorName, $color in $showtix-colors {
   .showtix-background__#{$colorName} {
