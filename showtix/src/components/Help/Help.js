@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import LocalizedStrings from 'react-localization';
-
 import en from './locales/en.json';
 import fr from './locales/fr.json';
 

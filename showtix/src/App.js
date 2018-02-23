@@ -13,11 +13,20 @@ const Home = () => (
   		<div className="showtix-section showtix-background__primary-1">
 	  		<div className="container">
 			    <div className="row">
-			    	<div className="col-8">
+			    	<div className="col-12 col-md-8">
 			    		<h1>Home</h1>
 			    	</div>
-			    	<div className="col-4">
+			    	<div className="col-12 col-md-4">
 			    		<Help />
+			    	</div>
+			    </div>
+			</div>
+		</div> 
+		<div className="showtix-section showtix-background__primary-2">
+	  		<div className="container">
+			    <div className="row">
+			    	<div className="col-12 text-center">
+			    		<h1>Home</h1>
 			    	</div>
 			    </div>
 			</div>

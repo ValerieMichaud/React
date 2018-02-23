@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import LocalizedStrings from 'react-localization';
+import en from './locales/en.json';
+import fr from './locales/fr.json';
+
+let strings = new LocalizedStrings({en,fr});
 
 class AdminNavigation extends Component {
   render() {
@@ -8,9 +13,7 @@ class AdminNavigation extends Component {
     const isBoxOffice = pathname === '/events';
     const isSearch = pathname === '/search';
     const isAddCustomer = pathname === '/customer';
-    const isBulkEmail = pathname === '/bulk-email';
     const isAddEvent = pathname === '/event';
-    const isManageTags = pathname === '/tags';
     const isManageCoupons = pathname === '/coupons';
 
     return (
@@ -20,65 +23,54 @@ class AdminNavigation extends Component {
         </div>
         <ul className="showtix-navigation__list">
           <li className={!isBoxOffice ? 'showtix-navigation__item' : 'showtix-navigation__item is-active'}>
-            <Link className="showtix-navigation__link" to="/events">Box Office</Link>
+            <Link className="showtix-navigation__link" to="/events">{strings.boxOffice}</Link>
           </li>
           <li className="showtix-navigation__item">
-            <a className="showtix-navigation__link" href="#">Customers</a>
+            <a className="showtix-navigation__link" href="#">{strings.customers}</a>
             <ul className="showtix-navigation__sublist">
               <li className={!isSearch ? 'showtix-navigation__item' : 'showtix-navigation__item is-active'}>
-                <Link className="showtix-navigation__link" to="/search">Search</Link>
+                <Link className="showtix-navigation__link" to="/search">{strings.search}</Link>
               </li>
               <li className={!isAddCustomer ? 'showtix-navigation__item' : 'showtix-navigation__item is-active'}>
-                <Link className="showtix-navigation__link" to="/customer">Add</Link>
-              </li>
-              <li className={!isBulkEmail ? 'showtix-navigation__item' : 'showtix-navigation__item is-active'}>
-                <Link className="showtix-navigation__link" to="/bulk-email">Bulk Email</Link>
+                <Link className="showtix-navigation__link" to="/customer">{strings.add}</Link>
               </li>
             </ul>
           </li>
           <li className={!isBoxOffice ? 'showtix-navigation__item' : 'showtix-navigation__item is-active'}>
-            <Link className="showtix-navigation__link" to="/events">Events</Link>
+            <Link className="showtix-navigation__link" to="/events">{strings.events}</Link>
             <ul className="showtix-navigation__sublist">
               <li className={!isAddEvent ? 'showtix-navigation__item' : 'showtix-navigation__item is-active'}>
-                <Link className="showtix-navigation__link" to="/event">Add new event</Link>
+                <Link className="showtix-navigation__link" to="/event">{strings.createEvent}</Link>
               </li>
             </ul>
           </li>
           <li className="showtix-navigation__item">
-            <a className="showtix-navigation__link" href="#">Tags</a>
-            <ul className="showtix-navigation__sublist">
-              <li className={!isManageTags ? 'showtix-navigation__item' : 'showtix-navigation__item is-active'}>
-                <Link className="showtix-navigation__link" to="/tags">Manage</Link>
-              </li>
-            </ul>
-          </li>
-          <li className="showtix-navigation__item">
-            <a className="showtix-navigation__link" href="#">Coupons/Flexpass</a>
+            <a className="showtix-navigation__link" href="#">{strings.couponsFlexpass}</a>
             <ul className="showtix-navigation__sublist">
               <li className="showtix-navigation__item">
-                <a className="showtix-navigation__link" href="#">Create coupon</a>
+                <a className="showtix-navigation__link" href="#">{strings.createCoupon}</a>
               </li>
               <li className="showtix-navigation__item">
-                <a className="showtix-navigation__link" href="#">Create flexpass</a>
+                <a className="showtix-navigation__link" href="#">{strings.createFlexpass}</a>
               </li>
               <li className={!isManageCoupons ? 'showtix-navigation__item' : 'showtix-navigation__item is-active'}>
-                <Link className="showtix-navigation__link" to="/coupons">Manage</Link>
+                <Link className="showtix-navigation__link" to="/coupons">{strings.manage}</Link>
               </li>
             </ul>
           </li>
           <li className="showtix-navigation__item">
-            <a className="showtix-navigation__link" href="#">Users</a>
+            <a className="showtix-navigation__link" href="#">{strings.users}</a>
             <ul className="showtix-navigation__sublist">
               <li className="showtix-navigation__item">
-                <a className="showtix-navigation__link" href="#">Create a new user</a>
+                <a className="showtix-navigation__link" href="#">{strings.createUser}</a>
               </li>
               <li className="showtix-navigation__item">
-                <a className="showtix-navigation__link" href="#">Manage</a>
+                <a className="showtix-navigation__link" href="#">{strings.manage}</a>
               </li>
             </ul>
           </li>
           <li className="showtix-navigation__item">
-            <a className="showtix-navigation__link" href="#">Reports</a>
+            <a className="showtix-navigation__link" href="#">{strings.reports}</a>
             <ul className="showtix-navigation__sublist">
               <li className="showtix-navigation__item">
                 <a className="showtix-navigation__link" href="#">Event account</a>
@@ -110,16 +102,16 @@ class AdminNavigation extends Component {
             </ul>
           </li>
           <li className="showtix-navigation__item">
-            <a className="showtix-navigation__link" href="#">Preferences</a>
+            <a className="showtix-navigation__link" href="#">{strings.clientPreferences}</a>
           </li>
           <li className="showtix-navigation__item">
-            <a className="showtix-navigation__link" href="#">Purchase equipment</a>
+            <a className="showtix-navigation__link" href="#">{strings.purchaseEquipment}</a>
           </li>
           <li className="showtix-navigation__item">
-            <a className="showtix-navigation__link" href="#">Help</a>
+            <a className="showtix-navigation__link" href="#">{strings.faq}</a>
           </li>
           <li className="showtix-navigation__item">
-            <a className="showtix-navigation__link" href="#">Log out</a>
+            <a className="showtix-navigation__link" href="#">{strings.logout}</a>
           </li>
         </ul>
       </div> 
