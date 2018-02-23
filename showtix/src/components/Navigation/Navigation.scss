@@ -1,6 +1,8 @@
 @import 'styles/variables.scss';
 @import 'styles/components/badge.scss';
 
+$padding: 15px;
+
 .showtix-navigation {
   position: fixed;
   z-index: 99;

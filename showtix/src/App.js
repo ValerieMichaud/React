@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
-
 import Header from './components/Header/Header';
 import Navigation from './components/Navigation/Navigation';
 import Help from './components/Help/Help';
+import Cart from './components/Cart/Cart';
 
 import './App.css';
 
@@ -17,6 +17,7 @@ const Home = () => (
 			    		<h1>Home</h1>
 			    	</div>
 			    	<div className="col-12 col-md-4">
+			    		<Cart />
 			    		<Help />
 			    	</div>
 			    </div>
