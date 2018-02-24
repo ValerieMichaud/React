@@ -100,7 +100,7 @@ class Register extends Component {
 
   handleChange(e) {
     let value = e.target.value;
-    if(e.target.checked !== "undefined"){
+    if(e.target.type == "radio"){
       value = e.target.checked;
     }
     console.log(e.target);
@@ -266,16 +266,11 @@ class Register extends Component {
 
           <div class="row">
             <div class="col-12 col-md-6">
-              <div class="col-12 col-md-6">
               <div class="showtix-form__group">
                 <label class="showtix-label">{strings.billingState}*</label>
 
                 <div class="showtix-form__select">
                   <select class="showtix-input" object="business" name="state" value={this.state.register.business.state} onChange={this.handleChange.bind(this)}>
-                    <option value="">
-                      United States
-                    </option>
-
                     <option value="AK">
                       AK
                     </option>
@@ -524,10 +519,6 @@ class Register extends Component {
                       VI
                     </option>
 
-                    <option value="">
-                      Canada
-                    </option>
-
                     <option value="AB">
                       AB
                     </option>
@@ -582,7 +573,6 @@ class Register extends Component {
                   </select>
                 </div>
               </div>
-            </div>
             </div>
 
             <div class="col-12 col-md-6">
