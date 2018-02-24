@@ -1,0 +1,19 @@
+{
+	"title":"Sign up as a Client",
+	"orgName":"Organization/Business Name",
+	"orgNameTooltip":"Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble",
+	"orgBillingAddress1":"Billing Address 1",
+	"orgBillingAddress1Tooltip":"Tooltip",
+	"orgEmail":"Organization/Business Email",
+	"orgEmailTooltip":"Tooltip",
+	"enterEmail":"Enter a valid email",
+	"orgBillingAddress2":"Billing Address 1",
+	"orgPhone":"Organization/Business Phone",
+	"orgPhoneTooltip":"Tooltip",
+	"billingCity":"Billing City",
+	"billingContact":"illing Contact",
+	"billingContactTooltip":"Tooltip",
+	"orgName":"Organization/Business Name",
+	"orgName":"Organization/Business Name",
+	"orgName":"Organization/Business Name"
+}

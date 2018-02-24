@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
+import LocalizedStrings from 'react-localization';
+import en from './locales/en.json';
+import fr from './locales/fr.json';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
 //import TextareaCount from './TextareaCount/TextareaCount';
 import './Register.css';
 
 let _this;
+let strings = new LocalizedStrings({en,fr});
+
+const LinkWithTooltip = ({ id, children, href, tooltip }) => (
+  <OverlayTrigger
+    overlay={<Tooltip id={id}>{tooltip}</Tooltip>}
+    placement="top"
+    delayShow={300}
+    delayHide={150}
+  >
+    <a className="showtix-tooltip" href={href}>{children}</a>
+  </OverlayTrigger>
+);
 
 class Register extends Component {
   constructor(props) {
@@ -104,18 +121,18 @@ class Register extends Component {
         <div class="showtix-section container">
           <div class="row">
             <div class="col-12 text-center">
-              <h1>Sign up as a Client</h1>
+              <h1>{strings.title}</h1>
             </div>
           </div>
 
           <div class="row">
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label">Organization/Business Name* <i class=
-                "showtix-tooltip" data-tooltip=
-                "Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble">
-                !</i></label>
-
+                <label class="showtix-label">{strings.orgName}* 
+                  <LinkWithTooltip tooltip={strings.orgNameTooltip} href="#" id="tooltip-1">
+                    !
+                  </LinkWithTooltip>
+                </label>
                 <div class="showtix-form__input">
                   <input class="showtix-input" type="text" object="business" name="name" value={this.state.register.business.name} onChange={this.handleChange.bind(this)} />
                 </div>
@@ -124,10 +141,11 @@ class Register extends Component {
 
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label">Billing Address 1* <i class="showtix-tooltip"
-                data-tooltip=
-                "Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble">
-                !</i></label>
+                <label class="showtix-label">{strings.orgBillingAddress1}*
+                  <LinkWithTooltip tooltip={strings.orgBillingAddress1Tooltip} href="#" id="tooltip-2">
+                    !
+                  </LinkWithTooltip>
+                </label>
 
                 <div class="showtix-form__input">
                   <input class="showtix-input" type="text" object="business" name="address1" value={this.state.register.business.address1} onChange={this.handleChange.bind(this)} />
@@ -139,16 +157,17 @@ class Register extends Component {
           <div class="row">
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label" for="business_email">Organization/Business Email* <i class=
-                "showtix-tooltip" data-tooltip=
-                "Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble">
-                !</i></label>
+                <label class="showtix-label" for="business_email">{strings.orgEmail}* 
+                  <LinkWithTooltip tooltip={strings.orgEmailTooltip} href="#" id="tooltip-3">
+                    !
+                  </LinkWithTooltip>
+                </label>
 
                 <div class="showtix-form__input">
                   <input
                     type="text"
                     className="showtix-input"
-                    placeholder="Enter an email"
+                    placeholder={strings.enterEmail}
                     id="business_email"
                     object="business" name="email" 
                     value={this.state.register.business.email} 
@@ -160,7 +179,7 @@ class Register extends Component {
 
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label">Billing Address 2</label>
+                <label class="showtix-label">{strings.orgBillingAddress2}</label>
 
                 <div class="showtix-form__input">
                   <input 
@@ -179,10 +198,11 @@ class Register extends Component {
           <div class="row">
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label" for="business_phone">Organization/Business Phone* <i class=
-                "showtix-tooltip" data-tooltip=
-                "Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble">
-                !</i></label>
+                <label class="showtix-label" for="business_phone">{strings.orgPhone}* 
+                  <LinkWithTooltip tooltip={strings.orgPhoneTooltip} href="#" id="tooltip-4">
+                    !
+                  </LinkWithTooltip>
+                </label>
 
                 <div class="showtix-form__input">
                   <input
@@ -201,7 +221,7 @@ class Register extends Component {
 
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label">Billing City*</label>
+                <label class="showtix-label">{strings.billingCity}*</label>
 
                 <div class="showtix-form__input">
                   <input class="showtix-input" type="text" object="business" name="city" value={this.state.register.business.city} onChange={this.handleChange.bind(this)} />
@@ -213,10 +233,11 @@ class Register extends Component {
           <div class="row">
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label">Billing Contact* <i class="showtix-tooltip"
-                data-tooltip=
-                "Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble">
-                !</i></label>
+                <label class="showtix-label">{strings.billingContact}* 
+                  <LinkWithTooltip tooltip={strings.billingContactTooltip} href="#" id="tooltip-5">
+                    !
+                  </LinkWithTooltip>
+                </label>
 
                 <div class="showtix-form__input">
                   <input class="showtix-input" type="text" object="business" name="contact" value={this.state.register.business.contact} onChange={this.handleChange.bind(this)} />

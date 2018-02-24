@@ -1,3 +1,60 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+@import 'bootstrap/scss/tooltip';
+
+.tooltip {
+  font-size: 11px;
+  font-weight: 300;
+  &.in {
+    opacity: 0.9;
+  }
+  &-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+  }
+  &.top {
+    .tooltip-arrow {
+      bottom: 0;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px 5px 0;
+      border-top-color: #000;
+    }
+  }
+  &.right {
+    .tooltip-arrow {
+      top: 50%;
+      left: 0;
+      margin-top: -5px;
+      border-width: 5px 5px 5px 0;
+      border-right-color: #000;
+    }
+  }
+  &.left {
+    .tooltip-arrow {
+      top: 50%;
+      right: 0;
+      margin-top: -5px;
+      border-width: 5px 0 5px 5px;
+      border-left-color: #000;
+    }
+  }
+  &.bottom {
+    .tooltip-arrow {
+      top: 0;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 0 5px 5px;
+      border-bottom-color: #000;
+    }
+  }
+}
+
 .showtix-tooltip {
   position: relative;
   display: inline-flex;
@@ -14,48 +71,8 @@
   font-size: 14px;
   font-weight: 800;
   font-style: normal;
-
-  &:before, &:after {
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  &:before {
-    position: absolute;
-    bottom: 110%;
-    left: 50%;
-    margin-bottom: 5px;
-    margin-left: -125px;
-    padding: 7px;
-    min-width: 250px;
-    border-radius: $border-radius;
-    background-color: map-get($showtix-colors, grey-3);
-    color: map-get($showtix-colors, white);;
-    content: attr(data-tooltip);
-    text-align: center;
-    font-size: 11px;
-    font-weight: 300;
-    line-height: 1.2;
-  }
-
-  &:after {
-    position: absolute;
-    bottom: 110%;
-    left: 50%;
-    margin-left: -5px;
-    width: 0;
-    border-top: 5px solid map-get($showtix-colors, grey-3);
-    border-right: 5px solid transparent;
-    border-left: 5px solid transparent;
-    content: " ";
-    font-size: 0;
-    line-height: 0;
-  }
-
-  &:hover:before,
-  &:hover:after {
-    visibility: visible;
-    opacity: 1;
+  &:hover {
+    color: map-get($showtix-colors, white);
+    text-decoration: none;
   }
 }
