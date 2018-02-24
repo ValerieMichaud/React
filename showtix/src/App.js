@@ -6,6 +6,7 @@ import Help from './components/Help/Help';
 import Cart from './components/Cart/Cart';
 import EventListing from './components/EventListing/EventListing';
 import Event from './components/Event/Event';
+import Register from './components/Register/Register';
 
 import './App.css';
 
@@ -74,6 +75,7 @@ class App extends Component {
 		          	<Switch>
 		            	<Route exact path="/event" component={CreateEvent} />
 		            	<Route exact path="/event/:id" component={EditEvent} />
+		            	<Route path="/register" component={Register} />
 		            	<Route path="/" component={EventListing} />
 		          	</Switch>
 		        </div>  	
