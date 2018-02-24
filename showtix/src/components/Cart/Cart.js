@@ -28,7 +28,12 @@ class Cart extends Component {
 	    };
 	}
 
+	editTicket = (key, parentKey) => {
+		this.props.onEditTicket(key, parentKey);
+	}
+
 	render() {
+		const _this = this;
 		//strings.setLanguage('fr');
 	  	return (
 			<div>
@@ -46,8 +51,9 @@ class Cart extends Component {
 		  			<div className="showtix-cart__body">	
 		  				<div className="showtix-padder">
 							<h3 className="showtix-cart__title">{strings.cart}</h3>
-							
-							<CartItem />
+							{this.props.items.map((item, key) => 
+								<CartItem key={key} item={item} parentKey={key} onEditTicket={_this.editTicket} />
+							)}
 						</div>		
 					</div>	
 		  		</div>

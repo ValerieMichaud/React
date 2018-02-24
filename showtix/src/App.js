@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Navigation from './components/Navigation/Navigation';
 import Help from './components/Help/Help';
 import Cart from './components/Cart/Cart';
+import EventListing from './components/EventListing/EventListing';
 
 import './App.css';
 
@@ -70,7 +71,7 @@ class App extends Component {
 		          	<Switch>
 		            	<Route exact path="/event" component={CreateEvent} />
 		            	<Route exact path="/event/:id" component={EditEvent} />
-		            	<Route path="/" component={Home} />
+		            	<Route path="/" component={EventListing} />
 		          	</Switch>
 		        </div>  	
 	        </div>
