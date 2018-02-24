@@ -1,0 +1,48 @@
+.showtix-event {
+  background: map-get($showtix-colors, white);
+  border-radius: $border-radius;
+
+  &__header {
+  	position: relative;
+  	border-radius: $border-radius $border-radius 0 0;
+  	padding: 5px 50px 5px 25px;
+	background: map-get($showtix-colors, primary-1);
+	color: map-get($showtix-colors, white);
+	font-size: 16px;
+	font-weight: 500;
+	&:before {
+		position: absolute;
+		content: '';
+		display: block;
+		left: 8px;
+		top: 50%;
+		margin-top: -3px;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 5px 5px 0 5px;
+		border-color: map-get($showtix-colors, white) transparent transparent transparent;
+	}
+	&.is-active {
+		&:before {
+			border-width: 0 5px 5px 5px;
+			border-color: transparent transparent map-get($showtix-colors, white) transparent;
+		}
+	}
+  }
+
+  &__body {
+  	max-height: 0;
+  	overflow: hidden;
+  	transition: max-height 0.5s ease;
+  	&.is-active {
+  		max-height:1000px;
+  	}
+
+  	.row {
+  		&:nth-child(even) {
+			background: map-get($showtix-colors, grey-2);
+		}
+  	}
+  }
+}

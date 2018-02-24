@@ -1,5 +1,40 @@
 @import 'styles/variables.scss';
+@import 'styles/components/button.scss';
 
-.showtix-cart {
-	
+.showtix-cart-item {
+	position: relative;
+	margin: 0 $grid-gutter-width;
+	padding: $grid-gutter-width 0;
+	border-bottom: 1px solid map-get($showtix-colors, grey-3);
+
+	&__header {
+		padding-bottom: $grid-gutter-width;
+	}
+	&__poster {
+		margin-right: 10px;
+		img {
+			max-width: 70px;
+		}
+	}
+	&__infos {
+		
+	}
+	&__title {
+		font-size: 16px;
+		line-height: 16px;
+		font-weight: 600;
+		color: map-get($showtix-colors, primary-1);
+	}
+	&__date {
+		font-size: 14px;
+		line-height: 14px;
+		font-weight: 300;
+		color: map-get($showtix-colors, grey-3);
+	}
+	&:nth-child(2n+1) {
+		margin: 0;
+		padding-left: $grid-gutter-width;
+		padding-right: $grid-gutter-width;
+		background: lighten(map-get($showtix-colors, primary-1), 20%);
+	}
 }

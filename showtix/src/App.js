@@ -5,6 +5,7 @@ import Navigation from './components/Navigation/Navigation';
 import Help from './components/Help/Help';
 import Cart from './components/Cart/Cart';
 import EventListing from './components/EventListing/EventListing';
+import Event from './components/Event/Event';
 
 import './App.css';
 
@@ -39,12 +40,14 @@ const Home = () => (
 const CreateEvent = () => (
   <div>
     <h2>Create Event</h2>
+    <Event />
   </div>
 );
 
 const EditEvent = ({ match }) => (
   <div>
-    <h2>Edit event: {match.params.id}</h2>
+    <h2>Edit event</h2>
+    <Event id={match.params.id} />
   </div>
 );
 

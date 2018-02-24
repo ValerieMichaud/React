@@ -1,0 +1,143 @@
+.showtix-form {
+  &__group {
+    position: relative;
+    padding-bottom: $grid-gutter-width;
+  }
+
+  &__input {
+    position: relative;
+  }
+
+  &__money {
+    position: relative;
+    display: flex;
+    &:before {
+      position: relative;
+      content: '';
+      display: inline-block;
+      width: 49px;
+      height: 44px;
+      background: map-get($showtix-colors, grey-3);
+      border-radius: $border-radius 0 0 $border-radius;
+    }
+    &:after {
+      position: absolute;
+      content: '$';
+      left: 13px;
+      top: 5px;
+      display: inline-block;
+      color: map-get($showtix-colors, white);
+      font-weight: 800;
+      font-size: 24px;
+    }
+    .showtix-input {
+      border-radius: 0 $border-radius $border-radius 0;
+      text-align: right;
+    }
+
+    .showtix-table & {
+      &:before {
+        width: 35px;
+        height: 35px;
+      }
+      &:after {
+        left: 9px;
+        top: 6px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__select {
+    position: relative;
+    &:before, &:after {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      display: block;
+      content: '';
+      width: 0;
+      height: 0;
+    }
+    &:before {
+      margin-top: -9px;
+      border-style: solid;
+      border-width: 0 7px 7px 7px;
+      border-color: transparent transparent map-get($showtix-colors, primary-3) transparent;
+    }
+    &:after {
+      margin-top: 3px;
+      border-style: solid;
+      border-width: 7px 7px 0 7px;
+      border-color: map-get($showtix-colors, primary-3) transparent transparent transparent;
+    }
+    .showtix-input {
+      padding-right: 30px;
+    }
+  }
+
+  &__radio, &__checkbox {
+    position: relative;
+    padding-left: 30px;
+    .showtix-label {
+      cursor: pointer;
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        top: 1px;
+        border-radius: 50%;
+      }
+      &:before {
+        left: 0;
+        width: 24px;
+        height: 24px;
+        background: map-get($showtix-colors, white);
+      }
+      &:after {
+        left: 6px;
+        top: 7px;
+        width: 12px;
+        height: 12px;
+        opacity: 0;
+        background: map-get($showtix-colors, grey-3);
+        transform: scale3d(0, 0, 0);
+        transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+      }
+    }
+  }
+
+  &__checkbox {
+    .showtix-label {
+      &:before,
+      &:after {
+        border-radius: $border-radius;
+      }
+    }
+  }
+
+  &__multiple {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    *:nth-child(2) {
+      margin-left: 10px;
+    }
+    * {
+      flex: 1 1 auto;
+    }
+    .showtix-input {
+      min-width:80px;
+    }
+  }
+
+  &__error {
+    .showtix-label, .showtix-note {
+      color: map-get($showtix-colors, error);
+    }
+    .showtix-input {
+      background: lighten(map-get($showtix-colors, error), 35%);
+    }
+  }
+}

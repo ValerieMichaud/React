@@ -48,13 +48,11 @@ class Cart extends Component {
 		  					</div>
 		  				</div>		
 		  			</div>
-		  			<div className="showtix-cart__body">	
-		  				<div className="showtix-padder">
-							<h3 className="showtix-cart__title">{strings.cart}</h3>
-							{this.props.items.map((item, key) => 
-								<CartItem key={key} item={item} parentKey={key} onEditTicket={_this.editTicket} />
-							)}
-						</div>		
+		  			<div className="showtix-cart__body">
+						<h3 className="showtix-cart__title">{strings.cart}</h3>
+						{this.props.items.map((item, key) => 
+							<CartItem key={key} item={item} parentKey={key} onEditTicket={_this.editTicket} />
+						)}
 					</div>	
 		  		</div>
 			</div>

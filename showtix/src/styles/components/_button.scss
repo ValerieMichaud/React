@@ -15,7 +15,7 @@
 	overflow: hidden;
 
 	& + .showtix-button {
-		margin-left: $padding;
+		margin-left: $grid-gutter-width;
 	}
 
 	span {
