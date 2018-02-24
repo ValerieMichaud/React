@@ -36,6 +36,7 @@ class Register extends Component {
           address1: '',
           address2: '',
           city: '',
+          country: '',
           state: '',
           zip: ''
         },
@@ -247,7 +248,27 @@ class Register extends Component {
 
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label">Billing State/Province*</label>
+                <label class="showtix-label">{strings.billingCountry}*</label>
+
+                <div class="showtix-form__select">
+                  <select class="showtix-input" object="business" name="country" value={this.state.register.business.country} onChange={this.handleChange.bind(this)}>
+                    <option value="US">
+                      United States
+                    </option>
+                    <option value="CA">
+                      Canada
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="col-12 col-md-6">
+              <div class="showtix-form__group">
+                <label class="showtix-label">{strings.billingState}*</label>
 
                 <div class="showtix-form__select">
                   <select class="showtix-input" object="business" name="state" value={this.state.register.business.state} onChange={this.handleChange.bind(this)}>
@@ -562,16 +583,11 @@ class Register extends Component {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-md-6">
-              
             </div>
 
             <div class="col-12 col-md-6">
               <div class="showtix-form__group">
-                <label class="showtix-label" for="business_zip">Billing Zip*</label>
+                <label class="showtix-label" for="business_zip">{strings.billingZip}*</label>
 
                 <div class="showtix-form__input">
                   <input
@@ -594,8 +610,8 @@ class Register extends Component {
           <div class="container">
             <div class="row">
               <div class="col-12 text-center">
-                <h1>Administrator Information</h1>
-                <p class="showtix-subtitle">Sign in using one of your account:</p>
+                <h1>{strings.administrationInformation}</h1>
+                <p class="showtix-subtitle">{strings.administrationSignIn}</p>
                 <FacebookLogin
                   appId="396988290714942"
                   autoLoad={false}
@@ -612,17 +628,18 @@ class Register extends Component {
             <hr />
             <div class="row">
               <div class="col-12 text-center">
-                <p class="showtix-subtitle">Or create an account using your information:</p>
+                <p class="showtix-subtitle">{strings.administrationCreate}</p>
               </div>
             </div>
 
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">Username* <i class=
-                  "showtix-tooltip" data-tooltip=
-                  "Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble">
-                  !</i></label>
+                  <label class="showtix-label">{strings.username}*
+                    <LinkWithTooltip tooltip={strings.usernameTooltip} href="#" id="tooltip-6">
+                    !
+                    </LinkWithTooltip>
+                  </label>
 
                   <div class="showtix-form__input">
                     <input class="showtix-input" type="text" object="admin" name="username" value={this.state.register.admin.username} onChange={this.handleChange.bind(this)} />
@@ -632,10 +649,11 @@ class Register extends Component {
 
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">Password* <i class=
-                  "showtix-tooltip" data-tooltip=
-                  "Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble">
-                  !</i></label>
+                  <label class="showtix-label">{strings.password}*
+                    <LinkWithTooltip tooltip={strings.passwordTooltip} href="#" id="tooltip-7">
+                    !
+                    </LinkWithTooltip>
+                  </label>
 
                   <div class="showtix-form__input">
                     <input class="showtix-input" type="password" object="admin" name="password" value={this.state.register.admin.password} onChange={this.handleChange.bind(this)} />
@@ -647,7 +665,7 @@ class Register extends Component {
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">First Name*</label>
+                  <label class="showtix-label">{strings.firstName}*</label>
 
                   <div class="showtix-form__input">
                     <input class="showtix-input" type="text" object="admin" name="firstname" value={this.state.register.admin.firstname} onChange={this.handleChange.bind(this)} />
@@ -657,7 +675,7 @@ class Register extends Component {
 
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">Last Name*</label>
+                  <label class="showtix-label">{strings.lastName}*</label>
 
                   <div class="showtix-form__input">
                     <input class="showtix-input" type="text" object="admin" name="lastname" value={this.state.register.admin.lastname} onChange={this.handleChange.bind(this)} />
@@ -669,7 +687,7 @@ class Register extends Component {
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">Email*</label>
+                  <label class="showtix-label">{strings.email}*</label>
 
                   <div class="showtix-form__input">
                     <input class="showtix-input" type="text" object="admin" name="email" value={this.state.register.admin.email} onChange={this.handleChange.bind(this)} />
@@ -686,14 +704,14 @@ class Register extends Component {
           <div class="container">
             <div class="row">
               <div class="col-12 text-center">
-                <h1>Options</h1>
+                <h1>{strings.options}</h1>
               </div>
             </div>
 
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">Referred By <i class="showtix-tooltip"
+                  <label class="showtix-label">{strings.referredBy} <i class="showtix-tooltip"
                   data-tooltip=
                   "Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble">
                   !</i></label>
@@ -706,7 +724,7 @@ class Register extends Component {
 
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">Accept Donation</label>
+                  <label class="showtix-label">{strings.acceptDonation}</label>
 
                   <div class="row">
                     <div class="col-12 col-md-6">
@@ -720,7 +738,7 @@ class Register extends Component {
                           checked={this.state.register.options.donation === true} 
                           onChange={this.handleChange.bind(this)}
                          />
-                         <label class="showtix-label" for="donation-1">Yes</label>
+                         <label class="showtix-label" for="donation-1">{strings.yes}</label>
                       </div>
                     </div>
 
@@ -731,7 +749,7 @@ class Register extends Component {
                           name="donation"
                           checked={this.state.register.options.donation === false} 
                           onChange={this.handleChange.bind(this)}
-                          /> <label class="showtix-label" for="donation-2">No</label>
+                          /> <label class="showtix-label" for="donation-2">{strings.no}</label>
                       </div>
                     </div>
                   </div>
@@ -742,19 +760,16 @@ class Register extends Component {
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">On-Screen Donation Message</label>
+                  <label class="showtix-label">{strings.donationMessage}</label>
 
                   {/* <TextareaCount maxLength="250" /> */}
 
-                  <div class="showtix-note">
-                    Please limit to one sentence
-                  </div>
                 </div>
               </div>
 
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">Text for Donation Receipt Email</label>
+                  <label class="showtix-label">{strings.donationReceiptMessage}</label>
 
                   {/* <TextareaCount maxLength="250" /> */}
                 </div>
@@ -764,20 +779,20 @@ class Register extends Component {
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">Capture Customer Address Information</label>
+                  <label class="showtix-label">{strings.captureCustomerAddress}</label>
 
                   <div class="row">
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
                         <input type="radio" class="showtix-input" id="capture-1" name=
-                        "capture" /> <label class="showtix-label" for="capture-1">Yes</label>
+                        "capture" /> <label class="showtix-label" for="capture-1">{strings.yes}</label>
                       </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
                         <input type="radio" class="showtix-input" id="capture-2" name=
-                        "capture" /> <label class="showtix-label" for="capture-2">No</label>
+                        "capture" /> <label class="showtix-label" for="capture-2">{strings.no}</label>
                       </div>
                     </div>
                   </div>
@@ -786,20 +801,20 @@ class Register extends Component {
 
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">Do you allow will-call?</label>
+                  <label class="showtix-label">{strings.allowWillCall}</label>
 
                   <div class="row">
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
                         <input type="radio" class="showtix-input" id="willcall-1" name="willcall" />
-                        <label class="showtix-label" for="willcall-1">Yes</label>
+                        <label class="showtix-label" for="willcall-1">{strings.yes}</label>
                       </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
                         <input type="radio" class="showtix-input" id="willcall-2" name="willcall" />
-                        <label class="showtix-label" for="willcall-2">No</label>
+                        <label class="showtix-label" for="willcall-2">{strings.no}</label>
                       </div>
                     </div>
                   </div>
@@ -810,20 +825,20 @@ class Register extends Component {
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">Allow Call Center to perform Refunds</label>
+                  <label class="showtix-label">{strings.allowRefunds}</label>
 
                   <div class="row">
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
                         <input type="radio" class="showtix-input" id="refund-1" name="refund" />
-                        <label class="showtix-label" for="refund-1">Yes</label>
+                        <label class="showtix-label" for="refund-1">{strings.yes}</label>
                       </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
                         <input type="radio" class="showtix-input" id="refund-2" name="refund" />
-                        <label class="showtix-label" for="refund-2">No</label>
+                        <label class="showtix-label" for="refund-2">{strings.no}</label>
                       </div>
                     </div>
                   </div>
@@ -832,20 +847,20 @@ class Register extends Component {
 
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">Allow Call Center to perform Exchanges</label>
+                  <label class="showtix-label">{strings.allowExchanges}</label>
 
                   <div class="row">
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
                         <input type="radio" class="showtix-input" id="exchange-1" name="exchange" />
-                        <label class="showtix-label" for="exchange-1">Yes</label>
+                        <label class="showtix-label" for="exchange-1">{strings.yes}</label>
                       </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
                         <input type="radio" class="showtix-input" id="exchange-2" name="exchange" />
-                        <label class="showtix-label" for="exchange-2">No</label>
+                        <label class="showtix-label" for="exchange-2">{strings.no}</label>
                       </div>
                     </div>
                   </div>
@@ -871,7 +886,7 @@ class Register extends Component {
 
                 <p>BY CLICKING THE "SIGN ME UP!" BUTTON, YOU ACCEPT THE TERMS AND CONDITIONS OF
                 THESE AGREEMENTS AS OF THE DATE YOU BECOME A CLIENT OF SHOWTIX4U.<br />
-                IF YOU DO NOT AGREE TO ALL OF THESE TERMS AND CONDITIONS, DO NOT BECOME A
+                IF YOU DO {strings.no}T AGREE TO ALL OF THESE TERMS AND CONDITIONS, DO {strings.no}T BECOME A
                 CLIENT.</p>
               </div>
 
