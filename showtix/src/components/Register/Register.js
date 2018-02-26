@@ -65,6 +65,7 @@ class Register extends Component {
 
   facebookCallback(response) {
     console.log(response);
+    let adminUpdate = _this.state.register.admin;
     let nameArray = response.name.split(' ');
     let register = {
       admin: {
@@ -701,10 +702,11 @@ class Register extends Component {
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="showtix-form__group">
-                  <label class="showtix-label">{strings.referredBy} <i class="showtix-tooltip"
-                  data-tooltip=
-                  "Name of your organization as it will appear for all events. i.e. - Shadowlake Ensemble">
-                  !</i></label>
+                  <label class="showtix-label">{strings.referredBy}
+                    <LinkWithTooltip tooltip={strings.referredByTooltip} href="#" id="tooltip-8">
+                      !
+                    </LinkWithTooltip>
+                  </label>
 
                   <div class="showtix-form__input">
                     <input class="showtix-input" type="text" object="options" name="referred" value={this.state.register.options.referred} onChange={this.handleChange.bind(this)} />
