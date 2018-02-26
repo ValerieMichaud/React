@@ -30,7 +30,6 @@ class TextareaCount extends Component {
   }
 
   render() {
-    console.log(this.props.object)
     return (
       <div>
         <div class="showtix-form__input">
