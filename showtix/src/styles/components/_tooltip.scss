@@ -18,8 +18,9 @@
     border-style: solid;
   }
   &.top {
+    margin-top: -5px;
     .tooltip-arrow {
-      bottom: 0;
+      top: 100%;
       left: 50%;
       margin-left: -5px;
       border-width: 5px 5px 0;
@@ -27,6 +28,7 @@
     }
   }
   &.right {
+    margin-right: -5px;
     .tooltip-arrow {
       top: 50%;
       left: 0;
@@ -36,6 +38,7 @@
     }
   }
   &.left {
+    margin-left: -5px;
     .tooltip-arrow {
       top: 50%;
       right: 0;
@@ -45,8 +48,9 @@
     }
   }
   &.bottom {
+    margin-bottom: -5px;
     .tooltip-arrow {
-      top: 0;
+      bottom: 100%;
       left: 50%;
       margin-left: -5px;
       border-width: 0 5px 5px;
