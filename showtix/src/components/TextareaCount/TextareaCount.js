@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import './TextareaCount.css';
 
@@ -6,8 +6,15 @@ class TextareaCount extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      length: 0
+      length: 0,
+      value: '',
+      name: '',
+      object: ''
     }
+  }
+
+  handleChange = (target) => {
+    this.props.onChange(target);
   }
 
   handleKeyUp(e) {
@@ -23,10 +30,20 @@ class TextareaCount extends Component {
   }
 
   render() {
+    console.log(this.props.object)
     return (
       <div>
         <div class="showtix-form__input">
-          <textarea class="showtix-input" rows="5" onKeyUp={this.handleKeyUp.bind(this)}></textarea>
+          <textarea 
+            class="showtix-input" 
+            rows="5"
+            object={this.props.object}
+            name={this.props.name}
+            onChange={this.handleChange.bind(this)}
+            onKeyUp={this.handleKeyUp.bind(this)}
+          >
+            {this.props.value}
+          </textarea>
         </div>
         <div class="showtix-note text-right">
           {this.state.length}/{this.props.maxLength}

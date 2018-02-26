@@ -6,7 +6,7 @@ import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
-//import TextareaCount from './TextareaCount/TextareaCount';
+import TextareaCount from '../TextareaCount/TextareaCount';
 import './Register.css';
 
 let _this;
@@ -52,7 +52,7 @@ class Register extends Component {
         options: {
           referred: '',
           donation: false,
-          donationMessage: '',
+          donationMessage: 'Test',
           donationEmail: '',
           captureAddress: false,
           willcall: false,
@@ -64,53 +64,38 @@ class Register extends Component {
   }
 
   facebookCallback(response) {
-    console.log(response);
-    let adminUpdate = _this.state.register.admin;
     let nameArray = response.name.split(' ');
-    let register = {
-      admin: {
-        email: response.email,
-        username: nameArray[0]+nameArray[1],
-        firstname: nameArray[0],
-        lastname: nameArray[1],
-        token: response.accessToken,
-        id: response.id
-      }
-    }
-    _this.setState({
-      register: register,
-    });
+    let registerUpdate = _this.state.register;
+    registerUpdate["admin"]["email"] = response.email;
+    registerUpdate["admin"]["username"] = nameArray[0]+nameArray[1];
+    registerUpdate["admin"]["firstname"] = nameArray[0];
+    registerUpdate["admin"]["lastname"] = nameArray[1];
+    registerUpdate["admin"]["token"] = response.accessToken;
+    registerUpdate["admin"]["id"] = response.id;
+    _this.setState({register: registerUpdate});
   }
 
   googleCallback(response) {
-    console.log(response);
-    let register = {
-      admin: {
-        email: response.profileObj.email,
-        username: response.profileObj.givenName + response.profileObj.familyName,
-        firstname: response.profileObj.givenName,
-        lastname: response.profileObj.familyName,
-        token: response.accessToken,
-        id: response.googleId
-      }
-    }
-    _this.setState({
-      register: register,
-    });
+    let registerUpdate = _this.state.register;
+    registerUpdate["admin"]["email"] = response.profileObj.email;
+    registerUpdate["admin"]["username"] = response.profileObj.givenName + response.profileObj.familyName;
+    registerUpdate["admin"]["firstname"] = response.profileObj.givenName;
+    registerUpdate["admin"]["lastname"] = response.profileObj.familyName;
+    registerUpdate["admin"]["token"] = response.accessToken;
+    registerUpdate["admin"]["id"] = response.googleId;
+    _this.setState({register: registerUpdate});
   }
 
   handleChange(e) {
-    let value = e.target.value;
-    if(e.target.type == "radio"){
-      value = e.target.checked;
+    let target = e.target;
+    let value = target.value;
+    if(e.target.type === "radio"){
+      (value === "true") ? value = true : value = false;
     }
-    console.log(e.target);
-    console.log(value);
-    let object = e.target.attributes.getNamedItem('object').value;
-    let property = e.target.name;
-    let registerUpdate = this.state.register;
-    registerUpdate[object][property] = value;
-    this.setState({register: registerUpdate})
+    let object = target.attributes.getNamedItem('object').value;
+    let registerUpdate = _this.state.register;
+    registerUpdate[object][target.name] = value;
+    _this.setState({register: registerUpdate});
   }
 
   componentWillMount() {
@@ -727,6 +712,7 @@ class Register extends Component {
                           id="donation-1"
                           object="options"
                           name="donation"
+                          value="true"
                           checked={this.state.register.options.donation === true} 
                           onChange={this.handleChange.bind(this)}
                          />
@@ -739,6 +725,7 @@ class Register extends Component {
                         <input type="radio" class="showtix-input" id="donation-2"
                           object="options"
                           name="donation"
+                          value="false"
                           checked={this.state.register.options.donation === false} 
                           onChange={this.handleChange.bind(this)}
                           /> <label class="showtix-label" for="donation-2">{strings.no}</label>
@@ -754,7 +741,13 @@ class Register extends Component {
                 <div class="showtix-form__group">
                   <label class="showtix-label">{strings.donationMessage}</label>
 
-                  {/* <TextareaCount maxLength="250" /> */}
+                  <TextareaCount 
+                    maxLength="250" 
+                    object={"options"}
+                    name={"donationMessage"}
+                    value={this.state.register.options.donationMessage}
+                    onChange={this.handleChange}
+                  />
 
                 </div>
               </div>
@@ -763,7 +756,14 @@ class Register extends Component {
                 <div class="showtix-form__group">
                   <label class="showtix-label">{strings.donationReceiptMessage}</label>
 
-                  {/* <TextareaCount maxLength="250" /> */}
+                  <TextareaCount 
+                    maxLength="250" 
+                    object={"options"}
+                    name={"donationEmail"}
+                    value={this.state.register.options.donationEmail}
+                    onChange={this.handleChange}
+                  />
+
                 </div>
               </div>
             </div>
@@ -776,15 +776,32 @@ class Register extends Component {
                   <div class="row">
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
-                        <input type="radio" class="showtix-input" id="capture-1" name=
-                        "capture" /> <label class="showtix-label" for="capture-1">{strings.yes}</label>
+                        <input 
+                          type="radio"
+                          class="showtix-input"
+                          id="captureAddress-1"
+                          object="options"
+                          name="captureAddress"
+                          value="true"
+                          checked={this.state.register.options.captureAddress === true} 
+                          onChange={this.handleChange.bind(this)}
+                         />
+                         <label class="showtix-label" for="captureAddress-1">{strings.yes}</label>
                       </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
-                        <input type="radio" class="showtix-input" id="capture-2" name=
-                        "capture" /> <label class="showtix-label" for="capture-2">{strings.no}</label>
+                        <input 
+                          type="radio" 
+                          class="showtix-input" 
+                          id="captureAddress-2"
+                          object="options"
+                          name="captureAddress"
+                          value="false"
+                          checked={this.state.register.options.captureAddress === false} 
+                          onChange={this.handleChange.bind(this)}
+                          /> <label class="showtix-label" for="captureAddress-2">{strings.no}</label>
                       </div>
                     </div>
                   </div>
@@ -798,15 +815,32 @@ class Register extends Component {
                   <div class="row">
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
-                        <input type="radio" class="showtix-input" id="willcall-1" name="willcall" />
-                        <label class="showtix-label" for="willcall-1">{strings.yes}</label>
+                        <input 
+                          type="radio"
+                          class="showtix-input"
+                          id="willcall-1"
+                          object="options"
+                          name="willcall"
+                          value="true"
+                          checked={this.state.register.options.willcall === true} 
+                          onChange={this.handleChange.bind(this)}
+                         />
+                         <label class="showtix-label" for="willcall-1">{strings.yes}</label>
                       </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
-                        <input type="radio" class="showtix-input" id="willcall-2" name="willcall" />
-                        <label class="showtix-label" for="willcall-2">{strings.no}</label>
+                        <input 
+                          type="radio" 
+                          class="showtix-input" 
+                          id="willcall-2"
+                          object="options"
+                          name="willcall"
+                          value="false"
+                          checked={this.state.register.options.willcall === false} 
+                          onChange={this.handleChange.bind(this)}
+                          /> <label class="showtix-label" for="willcall-2">{strings.no}</label>
                       </div>
                     </div>
                   </div>
@@ -822,15 +856,32 @@ class Register extends Component {
                   <div class="row">
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
-                        <input type="radio" class="showtix-input" id="refund-1" name="refund" />
-                        <label class="showtix-label" for="refund-1">{strings.yes}</label>
+                        <input 
+                          type="radio"
+                          class="showtix-input"
+                          id="refund-1"
+                          object="options"
+                          name="refund"
+                          value="true"
+                          checked={this.state.register.options.refund === true} 
+                          onChange={this.handleChange.bind(this)}
+                         />
+                         <label class="showtix-label" for="refund-1">{strings.yes}</label>
                       </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
-                        <input type="radio" class="showtix-input" id="refund-2" name="refund" />
-                        <label class="showtix-label" for="refund-2">{strings.no}</label>
+                        <input 
+                          type="radio" 
+                          class="showtix-input" 
+                          id="refund-2"
+                          object="options"
+                          name="refund"
+                          value="false"
+                          checked={this.state.register.options.refund === false} 
+                          onChange={this.handleChange.bind(this)}
+                          /> <label class="showtix-label" for="refund-2">{strings.no}</label>
                       </div>
                     </div>
                   </div>
@@ -844,15 +895,32 @@ class Register extends Component {
                   <div class="row">
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
-                        <input type="radio" class="showtix-input" id="exchange-1" name="exchange" />
-                        <label class="showtix-label" for="exchange-1">{strings.yes}</label>
+                        <input 
+                          type="radio"
+                          class="showtix-input"
+                          id="exchange-1"
+                          object="options"
+                          name="exchange"
+                          value="true"
+                          checked={this.state.register.options.exchange === true} 
+                          onChange={this.handleChange.bind(this)}
+                         />
+                         <label class="showtix-label" for="exchange-1">{strings.yes}</label>
                       </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                       <div class="showtix-form__radio">
-                        <input type="radio" class="showtix-input" id="exchange-2" name="exchange" />
-                        <label class="showtix-label" for="exchange-2">{strings.no}</label>
+                        <input 
+                          type="radio" 
+                          class="showtix-input" 
+                          id="exchange-2"
+                          object="options"
+                          name="exchange"
+                          value="false"
+                          checked={this.state.register.options.exchange === false} 
+                          onChange={this.handleChange.bind(this)}
+                          /> <label class="showtix-label" for="exchange-2">{strings.no}</label>
                       </div>
                     </div>
                   </div>
