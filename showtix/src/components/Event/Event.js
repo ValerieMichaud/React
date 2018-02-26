@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import Modal from 'react-bootstrap/lib/Modal';
 
 import './Event.css';
 
@@ -53,6 +55,10 @@ const SortableList = SortableContainer(({items}) => {
 class Event extends Component {
   constructor(props) {
     super(props);
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
     this.state = {
       event: {},
       files: [],
@@ -70,9 +76,19 @@ class Event extends Component {
         role: '',
         delete: false
       }],
-      prices: ['price-0']
+      prices: ['price-0'],
+      showTicketModal: false
     };
   }
+
+  handleClose() {
+    this.setState({ showTicketModal: false });
+  }
+
+  handleShow() {
+    this.setState({ showTicketModal: true });
+  }
+
 
   onDrop(files) {
     this.setState({
@@ -1275,8 +1291,147 @@ class Event extends Component {
                       <div class="row">
                         <div class="col-12 col-md-6">
                           <button class=
-                          "showtix-button showtix-background__primary-1"><span>Assign
+                          "showtix-button showtix-background__primary-1" onClick={this.handleShow}><span>Assign
                           tickets</span></button>
+
+                          <Modal show={this.state.showTicketModal} onHide={this.handleClose}>
+                            <Modal.Header closeButton>
+                              <Modal.Title>Tickets assignment</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                              <div class="table-responsive">
+                                <table class="showtix-table showtix-table__theme2">
+                                  <thead>
+                                      <tr>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">Adult - $15.00</th>
+                                        <th class="text-center">Senior and Student - $12.00</th>
+                                        <th class="text-center">VIP - $20.00</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                        <td class="text-left">
+                                            Section Left
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="showtix-form__group">
+                                              <div class="showtix-form__select">
+                                                  <select class="showtix-input">
+                                                    <option>Both</option>
+                                                    <option>Box office only</option>
+                                                    <option>No one</option>
+                                                  </select>
+                                              </div> 
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="showtix-form__group">
+                                              <div class="showtix-form__select">
+                                                  <select class="showtix-input">
+                                                    <option>Both</option>
+                                                    <option>Box office only</option>
+                                                    <option>No one</option>
+                                                  </select>
+                                              </div> 
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="showtix-form__group">
+                                              <div class="showtix-form__select">
+                                                  <select class="showtix-input">
+                                                    <option>Both</option>
+                                                    <option>Box office only</option>
+                                                    <option>No one</option>
+                                                  </select>
+                                              </div> 
+                                            </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td class="text-left">
+                                            Section Right
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="showtix-form__group">
+                                              <div class="showtix-form__select">
+                                                  <select class="showtix-input">
+                                                    <option>Both</option>
+                                                    <option>Box office only</option>
+                                                    <option>No one</option>
+                                                  </select>
+                                              </div> 
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="showtix-form__group">
+                                              <div class="showtix-form__select">
+                                                  <select class="showtix-input">
+                                                    <option>Both</option>
+                                                    <option>Box office only</option>
+                                                    <option>No one</option>
+                                                  </select>
+                                              </div> 
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="showtix-form__group">
+                                              <div class="showtix-form__select">
+                                                  <select class="showtix-input">
+                                                    <option>Both</option>
+                                                    <option>Box office only</option>
+                                                    <option>No one</option>
+                                                  </select>
+                                              </div> 
+                                            </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td class="text-left">
+                                            Section Front center
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="showtix-form__group">
+                                              <div class="showtix-form__select">
+                                                  <select class="showtix-input">
+                                                    <option>Both</option>
+                                                    <option>Box office only</option>
+                                                    <option>No one</option>
+                                                  </select>
+                                              </div> 
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="showtix-form__group">
+                                              <div class="showtix-form__select">
+                                                  <select class="showtix-input">
+                                                    <option>Both</option>
+                                                    <option>Box office only</option>
+                                                    <option>No one</option>
+                                                  </select>
+                                              </div> 
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="showtix-form__group">
+                                              <div class="showtix-form__select">
+                                                  <select class="showtix-input">
+                                                    <option>Both</option>
+                                                    <option>Box office only</option>
+                                                    <option>No one</option>
+                                                  </select>
+                                              </div> 
+                                            </div>
+                                        </td>
+                                      </tr>
+                                  </tbody>
+                                </table>
+                            </div> 
+                            </Modal.Body>
+                            <Modal.Footer>
+                              <button type="button" onClick={this.handleClose} class="showtix-button showtix-background__primary-1"><span>Save and close</span></button>
+                            </Modal.Footer>
+                          </Modal>
                         </div>
                       </div>
                     </div>
