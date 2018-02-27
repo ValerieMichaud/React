@@ -57,6 +57,7 @@ class App extends Component {
 	    super(props);
 	    this.state = {
 	      	navigationOpen: false,
+	      	cartOpen: false
 	    };
 	}
 
@@ -66,17 +67,23 @@ class App extends Component {
     	});
   	}
 
+  	toggleCart = (dataFromChild) => {
+    	this.setState({
+      		cartOpen: !this.state.cartOpen,
+    	});
+  	}
+
   	render() {
     	return (
       		<div>
-	          	<Header callbackFromParent={this.toggleNav} navigationOpen={this.state.navigationOpen} />
+	          	<Header toggleNav={this.toggleNav} toggleCart={this.toggleCart} navigationOpen={this.state.navigationOpen} />
 	          	<Navigation navigationOpen={this.state.navigationOpen} />
 	          	<div className="showtix-page-body">
 		          	<Switch>
 		            	<Route exact path="/event" component={CreateEvent} />
 		            	<Route exact path="/event/:id" component={EditEvent} />
 		            	<Route path="/register" component={RegisterPage} />
-		            	<Route path="/" component={EventListing} />
+		            	<Route path="/" render={() => <EventListing cartOpen={this.state.cartOpen}/>} />
 		          	</Switch>
 		        </div>  	
 	        </div>

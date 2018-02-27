@@ -34,10 +34,11 @@ class Cart extends Component {
 
 	render() {
 		const _this = this;
+		console.log(this.props.cartOpen);
 		//strings.setLanguage('fr');
 	  	return (
 			<div>
-		  		<div className="showtix-cart">
+		  		<div className={!this.props.cartOpen ? 'showtix-cart' : 'showtix-cart is-active'}>
 		  			<div className="showtix-cart__header">
 		  				<div className="showtix-timer">
 		  					<div className="showtix-padder">

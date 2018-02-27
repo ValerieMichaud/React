@@ -7,7 +7,11 @@ import './Header.css';
 
 class Header extends Component {
   toggleNav() {
-    this.props.callbackFromParent();
+    this.props.toggleNav();
+  }
+
+  toggleCart() {
+    this.props.toggleCart();
   }
 
   render() {
@@ -31,14 +35,14 @@ class Header extends Component {
                   <a href="tel:18669678167">1-866-967-8167</a>
                 </div>  
               </div>
-              <div className="showtix-header__cart">
+              <button className="showtix-header__cart" onClick={this.toggleCart.bind(this)}>
                 <div className="showtix-header__cart__total">
                   0
                 </div> 
                 <div className="showtix-header__cart__image"> 
                   <img src={cartIcon} />
                 </div>  
-              </div>
+              </button>
             </div>
 
             <a className="showtix-header__brand" href="/">
