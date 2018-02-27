@@ -246,7 +246,12 @@ class Register extends Component {
                 <label class="showtix-label">{strings.billingCity}*</label>
 
                 <div class="showtix-form__input">
-                  <input class="showtix-input" type="text" object="business" name="city" value={this.state.register.business.city} onChange={this.handleChange.bind(this)} />
+                  <input class="showtix-input"
+                    type="text"
+                    object="business"
+                    name="city"
+                    value={this.state.register.business.city}
+                    onChange={this.handleChange.bind(this)} />
                 </div>
               </div>
             </div>
@@ -262,7 +267,12 @@ class Register extends Component {
                 </label>
 
                 <div class="showtix-form__input">
-                  <input class="showtix-input" type="text" object="business" name="contact" value={this.state.register.business.contact} onChange={this.handleChange.bind(this)} />
+                  <input class="showtix-input"
+                  type="text"
+                  object="business"
+                  name="contact"
+                  value={this.state.register.business.contact}
+                  onChange={this.handleChange.bind(this)} />
                 </div>
               </div>
             </div>
@@ -272,7 +282,11 @@ class Register extends Component {
                 <label class="showtix-label">{strings.billingCountry}*</label>
 
                 <div class="showtix-form__select">
-                  <select class="showtix-input" object="business" name="country" value={this.state.register.business.country} onChange={this.handleChange.bind(this)}>
+                  <select class="showtix-input"
+                  object="business"
+                  name="country"
+                  value={this.state.register.business.country}
+                  onChange={this.handleChange.bind(this)}>
                     <option value="US" selected>
                       United States
                     </option>
@@ -292,7 +306,11 @@ class Register extends Component {
 
                 <div class="showtix-form__select">
                   { this.state.register.business.country === "US" ?
-                    <select class="showtix-input" object="business" name="state" value={this.state.register.business.state} onChange={this.handleChange.bind(this)}>
+                    <select class="showtix-input"
+                      object="business"
+                      name="state"
+                      value={this.state.register.business.state}
+                      onChange={this.handleChange.bind(this)}>
                       <option value="AK">
                         AK
                       </option>
