@@ -6,7 +6,6 @@ import moment from 'moment';
 import Countdown from 'react-countdown-moment'
 import CartItem from './CartItem/CartItem';
 
-
 import './Cart.css';
 
 let strings = new LocalizedStrings({en,fr});
@@ -34,7 +33,6 @@ class Cart extends Component {
 
 	render() {
 		const _this = this;
-		console.log(this.props.cartOpen);
 		//strings.setLanguage('fr');
 	  	return (
 			<div>

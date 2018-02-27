@@ -64,8 +64,7 @@ class EventListing extends Component {
           price: 10,
           quantity: 1
         }]
-      }],
-      cartOpen: false
+      }]
     };
   }
 
@@ -110,13 +109,6 @@ class EventListing extends Component {
   }
 
   componentWillMount() {
-    let cartOpen = this.state.cartOpen;
-    cartOpen = this.props.cartOpen;
-    console.log(this.props)
-    this.setState({
-      cartOpen: cartOpen
-    });
-
   }
 
   render() {
